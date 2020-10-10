@@ -11,12 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5c0c89b8345b0468fbe40680921e0a, type: 3}
   m_Name: Warrior
   m_EditorClassIdentifier: 
-  DistanceAttack: 10
+  DistanceAttack: 8
   Speed: 12
   Damage: 10
-  SpeedDamage: 2
+  SpeedDamage: 0.8
   LiveMax: 75
-  ProbabilityDropItem: 50.3
+  ProbabilityDropItem: 60
   LookAtTarget: 0
   ShootProjectile: 0
   TextureArmor:

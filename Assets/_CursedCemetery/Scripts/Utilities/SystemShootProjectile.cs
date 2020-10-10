@@ -30,10 +30,6 @@ namespace CursedCemetery.Scripts.Utilities
             }
         }
 
-        private void Start()
-        {
-            Events.Pause += SetPause;
-        }
         // Set State Pause
         private void SetPause()
         {

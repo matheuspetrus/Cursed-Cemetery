@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +15,9 @@ namespace CursedCemetery.Scripts.Systens
 
         [Header("Texts")] [SerializeField] private TextMeshProUGUI _textPlayTime;
         [SerializeField] private TextMeshProUGUI _textMouseSensitivy;
-
-        public void Awake()
+      
+        
+        private void Start()
         {
             InitializaParameters();
         }
@@ -41,11 +43,15 @@ namespace CursedCemetery.Scripts.Systens
 
         private void InitializaParameters()
         {
-            if (PlayerPrefs.GetFloat("PlayTime") == null)
+            Cursor.visible =true;
+            Cursor.lockState = CursorLockMode.None;
+            
+            if (PlayerPrefs.GetFloat("PlayTime") <= 0)
             {
                 _playTime = 3;
                 _textPlayTime.text = _playTime.ToString("F0") + "min";
                 _sliderTime.value = _playTime;
+                PlayerPrefs.SetFloat("PlayTime", _playTime);
             }
             else
             {
@@ -54,11 +60,12 @@ namespace CursedCemetery.Scripts.Systens
                 _sliderTime.value = _playTime;
             }
 
-            if (PlayerPrefs.GetFloat("MouseSensitivy") == null)
+            if (PlayerPrefs.GetFloat("MouseSensitivy") <= 0)
             {
                 _mouseSensitivy = 100;
                 _textMouseSensitivy.text = (_mouseSensitivy / 100).ToString("F1");
                 _sliderMouse.value = _mouseSensitivy;
+                PlayerPrefs.SetFloat("MouseSensitivy", _mouseSensitivy);
             }
             else
             {

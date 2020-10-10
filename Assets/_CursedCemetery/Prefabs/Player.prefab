@@ -633,8 +633,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 18
-  _gravity: -9.81
-  _jumpHeight: 3
+  _gravity: -50
+  _jumpHeight: 4
   groundDistance: 0.4
   _isGrounded: 0
   _groundCheck: {fileID: 4793933309247056}

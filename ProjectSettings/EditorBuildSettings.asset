@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Project/Scenes/Menus.unity
+    path: Assets/_CursedCemetery/Scenes/Menus.unity
     guid: 23c93a4661428ca45bc83c1912f35257
   - enabled: 1
-    path: Assets/_Project/Scenes/Cemetery.unity
+    path: Assets/_CursedCemetery/Scenes/Cemetery.unity
     guid: 285b1d02a09d6e44ab21449921918139
+  - enabled: 1
+    path: Assets/_CursedCemetery/Scenes/GameOver.unity
+    guid: dd7c24e83a48cd648adb10f0ad53993f

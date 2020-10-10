@@ -1,6 +1,10 @@
-﻿using CursedCemetery.Scripts.Interfaces;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using CursedCemetery.Scripts.Interfaces;
 using CursedCemetery.Scripts.Systens;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CursedCemetery.Scripts.Utilities
 {
@@ -13,12 +17,15 @@ namespace CursedCemetery.Scripts.Utilities
         [Header("Objects")] [SerializeField] private GameObject _lifeObj;
         [SerializeField] private GameObject _arrowObj;
 
+        [SerializeField] private AudioSource _audioSource;
         private Pooler pool;
         private Transform _target;
 
+        
         private void Start()
         {
             pool = transform.parent.GetComponent<Pooler>();
+           
         }
 
         private void Update()
@@ -66,17 +73,28 @@ namespace CursedCemetery.Scripts.Utilities
 
             if (status != null)
             {
+                
                 if (_numberValue <= 50)
                 {
                     other.GetComponent<IStatus>().IncreaseLife(_valueLife);
-                    pool.ReturnObject(gameObject);
+                    StartCoroutine(ReturnObject());
                 }
                 else
                 {
                     other.GetComponent<IStatus>().IncreaseArrows(_valueArrow);
-                    pool.ReturnObject(gameObject);
+                    StartCoroutine(ReturnObject());
                 }
             }
+        }
+
+        IEnumerator ReturnObject()
+        {
+            if (!_audioSource.isPlaying)
+            {
+                _audioSource.Play();
+            }
+            yield return new WaitForSeconds(0.5f);
+            pool.ReturnObject(gameObject);
         }
     }
 }

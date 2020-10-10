@@ -29,8 +29,10 @@ namespace CursedCemetery.Scripts.Npc
         [Header("Objects")]
         [SerializeField] private Enemy _enemy;
         [SerializeField] private GameObject _armor;
+
+        [SerializeField] private AudioClip[]_sounds;
+        [SerializeField] private AudioSource _audioSource;
         
-        private bool _isPause;
         private NavMeshAgent _agent;
         private Transform _target;
         private Pooler _pool;
@@ -61,8 +63,7 @@ namespace CursedCemetery.Scripts.Npc
             _lookAtTarget = _enemy.LookAtTarget;
             _shootProjectile = _enemy.ShootProjectile;
             _probabilityDropItem = _enemy.ProbabilityDropItem;
-            Events.Pause+= SetPause;
-        
+
             if (_shootProjectile)
             {
                 _projectile = GetComponent<SystemShootProjectile>();
@@ -71,7 +72,6 @@ namespace CursedCemetery.Scripts.Npc
             {
                 _damage = _enemy.Damage;
             }
-
             if (_colorRandon)
             {
                 _armor.GetComponent<SkinnedMeshRenderer>().material.SetTexture("_MainTex",
@@ -97,10 +97,6 @@ namespace CursedCemetery.Scripts.Npc
         // Update is called once per frame
         void Update()
         {
-            if (_isPause)
-            {
-                return;
-            }
             Move();
             CheckDistance();
             LookAt();
@@ -114,6 +110,12 @@ namespace CursedCemetery.Scripts.Npc
 
                 if (_distanceTarget < _distanceAttack)
                 {
+                    _audioSource.clip = _sounds[0];
+                    if ( !_audioSource.isPlaying)
+                    {
+                        _audioSource.loop = true;
+                        _audioSource.Play();
+                    }
                     _agent.speed = 0;
                     _animator.SetBool(AnimationAttack, true);
                     if (_shootProjectile)
@@ -123,6 +125,13 @@ namespace CursedCemetery.Scripts.Npc
                 }
                 else
                 {
+                    _audioSource.clip = _sounds[1];
+                    if ( !_audioSource.isPlaying)
+                    {
+                        _audioSource.loop = true;
+                        _audioSource.Play();
+                    }
+                    _audioSource.Play();
                     _agent.speed = _enemy.Speed;
                     _animator.SetBool(AnimationAttack, false);
                 }
@@ -216,11 +225,6 @@ namespace CursedCemetery.Scripts.Npc
         public void SetItem(Pooler item)
         {
             _poolItens = item;
-        }
-        // Set State Pause
-        private void SetPause()
-        {
-            _isPause = !_isPause;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace CursedCemetery.Scripts.Player
         //Set mouse sensitivity
         private void Awake()
         {
-            if (PlayerPrefs.GetFloat("MouseSensitivy") == null)
+            if (PlayerPrefs.GetFloat("MouseSensitivy") <=0 )
             {
                 _mouseSensitivity = 100;
             }

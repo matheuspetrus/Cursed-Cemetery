@@ -780,6 +780,7 @@ GameObject:
   - component: {fileID: 114796644998549956}
   - component: {fileID: 136979096308188236}
   - component: {fileID: 136225116992714194}
+  - component: {fileID: 82786003893628584}
   m_Layer: 0
   m_Name: skeleton_archer_blue
   m_TagString: Untagged
@@ -1686,6 +1687,86 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1716926233054892}
   m_Mesh: {fileID: 4300002, guid: ee2b0b8603974134a87ae197eac676d7, type: 3}
+--- !u!82 &82786003893628584
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1967664777768204}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95095976213432428
 Animator:
   serializedVersion: 3
@@ -1729,6 +1810,10 @@ MonoBehaviour:
   _colorRandon: 1
   _enemy: {fileID: 11400000, guid: 0866022dfb6d7d94791d107b4b6db35a, type: 2}
   _armor: {fileID: 1030867273044028}
+  _sounds:
+  - {fileID: 8300000, guid: 21c3ee9a64c030d439c93189fb359140, type: 3}
+  - {fileID: 8300000, guid: 21c3ee9a64c030d439c93189fb359140, type: 3}
+  _audioSource: {fileID: 82786003893628584}
 --- !u!114 &114796644998549956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1740,8 +1825,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff66963d8e6a246469c9616db39cbbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectile: {fileID: 0}
-  spawnArrow: {fileID: 1306256371649676}
   _force: 80
   _forceCurrent: 0
   _forceVariable: 10
@@ -1749,6 +1832,8 @@ MonoBehaviour:
   _amountProjectile: 0
   _isPlayer: 0
   canShoot: 1
+  _projectile: {fileID: 0}
+  spawnArrow: {fileID: 1306256371649676}
 --- !u!136 &136225116992714194
 CapsuleCollider:
   m_ObjectHideFlags: 1

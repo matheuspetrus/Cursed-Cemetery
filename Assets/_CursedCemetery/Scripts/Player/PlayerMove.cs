@@ -18,14 +18,14 @@ namespace CursedCemetery.Scripts.Player
         private PlayerAnimation _animator;
         private float _moveX;
         private float _moveZ;
-        private bool _isPause;
-    
+
         [Header("Audios")] [SerializeField] private AudioListener[] sons;
 
         private AudioSource _audioSource;
         private CharacterController _controller;
         private Vector3 _velocity;
-
+        
+        
         private void Awake()
         {
             InitializeParameters();
@@ -33,11 +33,6 @@ namespace CursedCemetery.Scripts.Player
 
         private void Update()
         {
-            if (_isPause)
-            {
-                return;
-            }
-
             Move();
             Animations();
         }
@@ -72,12 +67,11 @@ namespace CursedCemetery.Scripts.Player
             _animator = GetComponent<PlayerAnimation>();
             _controller = GetComponent<CharacterController>();
             _audioSource = GetComponent<AudioSource>();
-            Events.Pause += SetPause;
         }
         // Set player's camera animations
         private void Animations()
         {
-            if (_moveX != 0 || _moveZ != 0)
+            if (_moveX != 0 || _moveZ != 0 && _isGrounded)
             {
                 _animator.SetAnimationsRun(true);
                 if (!_audioSource.isPlaying)
@@ -90,11 +84,6 @@ namespace CursedCemetery.Scripts.Player
                 _animator.SetAnimationsRun(false);
                 _audioSource.Pause();
             }
-        }
-        // Set State Pause
-        private void SetPause()
-        {
-            _isPause = !_isPause;
         }
     }
 }

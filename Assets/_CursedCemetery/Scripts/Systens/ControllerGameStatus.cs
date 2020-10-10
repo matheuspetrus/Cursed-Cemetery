@@ -15,26 +15,20 @@ namespace CursedCemetery.Scripts.Systens
 		[SerializeField] private TextMeshProUGUI _arrow;
 		[SerializeField] private TextMeshProUGUI _score;
 		[SerializeField] private TextMeshProUGUI _time;
-	
-		[Header("UI Game Over Objects")]
-		[SerializeField] private TextMeshProUGUI _numberWarriorsKilled;
-		[SerializeField] private TextMeshProUGUI _numberArchersKilled;
-		[SerializeField] private TextMeshProUGUI _totalScore;
-		[SerializeField] private TextMeshProUGUI _bestScore;
-	
+
 		[Header("Timer Settings")]
 		[SerializeField] private float _timerStart;
 		[SerializeField] private float _timerGame;
 
 		[Header("Menu Objects")]
 		[SerializeField] private GameObject _menuPause;
-		[SerializeField] private GameObject _menuScore;
-
+		
 		private float _warriorsKilled;
 		private float _archersKilled;
 		private float _timerSeconds = 59;
 		private bool _timerActive;
-		private bool _isPause;
+		private  bool _isPause;
+		private bool _isGameOver;
 
 		private void Start()
 		{
@@ -93,14 +87,7 @@ namespace CursedCemetery.Scripts.Systens
 
 			_time.text = minutes + ":" + seconds;
 		}
-		// Set game over parameters
-		private void GameOver()
-		{
-			Cursor.lockState = CursorLockMode.None;
-			Time.timeScale = 0;
-			_menuScore.SetActive(true);
-			SetValuesPanelScore();
-		}
+		
 		// Initializes the parameters
 		private void InitializeParameters()
 		{
@@ -109,8 +96,9 @@ namespace CursedCemetery.Scripts.Systens
 			Events.GameOver += GameOver;
 			Events.DeathEnemyArcher += DeathEnemyArcher;
 			Events.DeathEnemyWarrior += DeathEnemyWarrior;
-
-			if (PlayerPrefs.GetFloat("PlayTime") == null)
+			Cursor.visible = false;
+			_isGameOver = false;
+			if (PlayerPrefs.GetFloat("PlayTime") <=0)
 			{
 				_timerGame = 2;
 			}
@@ -130,21 +118,39 @@ namespace CursedCemetery.Scripts.Systens
 		{
 			_archersKilled++;
 		}
+		
+		// Set game over parameters
+		private void GameOver()
+		{
+			Cursor.visible =true;
+			Cursor.lockState = CursorLockMode.None;
+			SetValuesPanelScore();
+			SceneManager.LoadScene(2);
+		}
+		
 		// Set State Pause
 		private void SetPause()
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				_menuPause.SetActive(true);
-				Pause();
+				if (_isPause)
+				{
+					ButtonContinue();
+				}
+				else
+				{
+					Pause();
+				}
 			}
 		}
 		// set pause status parameters
 		private void Pause()
 		{
-			Events.Pause();
+			Cursor.visible = true;
+			_menuPause.SetActive(true);
 			Cursor.lockState = CursorLockMode.None;
 			Time.timeScale = 0;
+			_isPause = true;
 		}
 		///////////// menu buttons ///////////////
 		public void ButtonExit()
@@ -155,47 +161,25 @@ namespace CursedCemetery.Scripts.Systens
 		public void ButtonMainMenu()
 		{
 			Time.timeScale = 1;
-
 			SceneManager.LoadScene(0);
 		}
 
 		public void ButtonContinue()
 		{
-			Events.Pause();
+			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
 			_menuPause.SetActive(false);
+			_isPause =false;
 			Time.timeScale = 1;
 		}
 
-		public void ButtonRestart()
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-			SceneManager.LoadScene(1);
-			Time.timeScale = 1;
-		}
+		
 		///////////////////////////////////////
 		// Set score panel values
 		private void SetValuesPanelScore()
 		{
-			_numberWarriorsKilled.text = _warriorsKilled.ToString() + " = " + (_warriorsKilled * 10).ToString();
-			_numberArchersKilled.text = _archersKilled.ToString() + " = " + (_archersKilled * 20).ToString();
-			_totalScore.text = "Total = " + ((_warriorsKilled * 10) + (_archersKilled * 20)).ToString();
-			if (PlayerPrefs.GetFloat("BestScore") == null)
-			{
-				_bestScore.text = _totalScore.text;
-			}
-			else if (((_warriorsKilled * 10) + (_archersKilled * 20)) > PlayerPrefs.GetFloat("BestScore"))
-			{
-				float bestScore = (_warriorsKilled * 10) + (_archersKilled * 20);
-				_bestScore.text = _totalScore.text;
-
-				PlayerPrefs.SetFloat("BestScore", bestScore);
-			}
-			else
-			{
-				_bestScore.text = PlayerPrefs.GetFloat("BestScore").ToString();
-			}
-
+			PlayerPrefs.SetFloat("WarriorsKilled", _warriorsKilled);
+			PlayerPrefs.SetFloat("ArchersKilled", _archersKilled);
 		}
 
 		private void Score()

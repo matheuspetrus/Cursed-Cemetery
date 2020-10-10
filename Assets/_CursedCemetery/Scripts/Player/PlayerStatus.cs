@@ -1,4 +1,5 @@
-﻿using CursedCemetery.Scripts.Interfaces;
+﻿using System.Collections;
+using CursedCemetery.Scripts.Interfaces;
 using CursedCemetery.Scripts.Systens;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace CursedCemetery.Scripts.Player
         [SerializeField] private float _lifeMax;
         [SerializeField] private float _arrows;
 
+        [SerializeField] private GameObject _boodHit;
         private void Awake()
         {
             _life = _lifeMax;
@@ -30,19 +32,25 @@ namespace CursedCemetery.Scripts.Player
         //decreases the player's life
         public void DecreaseLife(float life)
         {
+            StartCoroutine(TimeBloodHit());
             if (_life > 0)
             {
                 _life -= life;
                 if (_life <= 0)
                 {
+                    _life = 0;
                     Events.GameOver();
                 }
             }
-            else
-            {
-                _life = 0;
-            }
         }
+
+         IEnumerator TimeBloodHit()
+        {
+            _boodHit.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            _boodHit.SetActive(false);
+        }
+
         //Returns the number of arrows in the inventory
         public float GetArrows()
         {

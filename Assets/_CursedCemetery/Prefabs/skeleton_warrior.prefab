@@ -1767,6 +1767,10 @@ MonoBehaviour:
   _colorRandon: 1
   _enemy: {fileID: 11400000, guid: 805c3103619b15a40b2406c24a98e77c, type: 2}
   _armor: {fileID: 1220566341620230}
+  _sounds:
+  - {fileID: 8300000, guid: 6b2471ce995865147990fecc66e1e68e, type: 3}
+  - {fileID: 8300000, guid: b5af81cd00f35f94c850d6b5ba203836, type: 3}
+  _audioSource: {fileID: 82595158088601654}
 --- !u!135 &135645734728951446
 SphereCollider:
   m_ObjectHideFlags: 1
