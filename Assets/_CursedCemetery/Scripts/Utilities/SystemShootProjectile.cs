@@ -72,7 +72,7 @@ namespace CursedCemetery.Scripts.Utilities
             canShoot = false;
             yield return new WaitForSeconds(_timeToShoot);
             canShoot = true;
-            spawnArrow.SetActive(true);
+            SetStateSpawn();
         }
 
         private void Update()
@@ -82,9 +82,19 @@ namespace CursedCemetery.Scripts.Utilities
                 return;
             }
 
-            if (Input.GetMouseButtonDown(0) && _isPlayer && _player.GetArrows() > 0)
+            if (Input.GetMouseButton(0) && _isPlayer && _player.GetArrows() > 0)
+            {
+                if (_force <= 100)
+                {
+                    _force += Time.deltaTime *60;
+                }
+                
+            }
+
+            if (Input.GetMouseButtonUp(0) && _isPlayer && _player.GetArrows() > 0)
             {
                 Shoot();
+                _force = 0;
             }
         }
     
@@ -97,6 +107,23 @@ namespace CursedCemetery.Scripts.Utilities
         public void SetCanShoot()
         {
             canShoot = true;
+        }
+
+        private void SetStateSpawn()
+        {
+            if (_isPlayer && _player.GetArrows() <= 0)
+            {
+                spawnArrow.SetActive(false);
+            }
+            else
+            {
+                spawnArrow.SetActive(true);
+            }
+        }
+
+        public float GetForce()
+        {
+            return _force;
         }
     }
 }

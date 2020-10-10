@@ -1,7 +1,9 @@
 ﻿using CursedCemetery.Scripts.Player;
+using CursedCemetery.Scripts.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace CursedCemetery.Scripts.Systens
 {
@@ -22,6 +24,8 @@ namespace CursedCemetery.Scripts.Systens
 
 		[Header("Menu Objects")]
 		[SerializeField] private GameObject _menuPause;
+		[SerializeField] private GameObject _sliderForce;
+		
 		
 		private float _warriorsKilled;
 		private float _archersKilled;
@@ -45,6 +49,16 @@ namespace CursedCemetery.Scripts.Systens
 		// Set player variables
 		private void StatusPlayer()
 		{
+			_sliderForce.GetComponent<Slider>().value = _player.GetComponent<SystemShootProjectile>().GetForce() / 100;
+			if (_sliderForce.GetComponent<Slider>().value > 0)
+			{
+				_sliderForce.SetActive(true);
+			}
+			else
+			{
+				_sliderForce.SetActive(false);
+			}
+			
 			_life.text = _player.GetComponent<PlayerStatus>().GetLife().ToString();
 			_arrow.text = _player.GetComponent<PlayerStatus>().GetArrows().ToString();
 		}

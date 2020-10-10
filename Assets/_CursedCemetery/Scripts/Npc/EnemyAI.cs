@@ -39,9 +39,12 @@ namespace CursedCemetery.Scripts.Npc
         private Pooler _poolItens;
         private Animator _animator;
         private SystemShootProjectile _projectile;
+
+        private bool _isHit;
         
         private readonly string AnimationDeath = "Death";
         private readonly string AnimationAttack= "Attack";
+        private readonly string AnimationHit = "Hit";
 
         // Use this for initialization
         private void Awake()
@@ -108,7 +111,7 @@ namespace CursedCemetery.Scripts.Npc
             {
                 _agent.SetDestination(_target.position);
 
-                if (_distanceTarget < _distanceAttack)
+                if (_distanceTarget < _distanceAttack &&!_isHit)
                 {
                     _audioSource.clip = _sounds[0];
                     if ( !_audioSource.isPlaying)
@@ -118,12 +121,13 @@ namespace CursedCemetery.Scripts.Npc
                     }
                     _agent.speed = 0;
                     _animator.SetBool(AnimationAttack, true);
+                    
                     if (_shootProjectile)
                     {
                         _projectile.Shoot();
                     }
                 }
-                else
+                else if(!_isHit)
                 {
                     _audioSource.clip = _sounds[1];
                     if ( !_audioSource.isPlaying)
@@ -134,6 +138,8 @@ namespace CursedCemetery.Scripts.Npc
                     _audioSource.Play();
                     _agent.speed = _enemy.Speed;
                     _animator.SetBool(AnimationAttack, false);
+                   
+                    
                 }
             }
         }
@@ -155,6 +161,11 @@ namespace CursedCemetery.Scripts.Npc
         // damage in AI
         public void ApplyDamage(float damage)
         {
+            _animator.SetBool(AnimationAttack, false);
+            _animator.SetBool(AnimationHit , true);
+            _isHit = true;
+            _agent.speed = 0;
+            StartCoroutine( TimeHit());
             _life -= damage;
             if (_life <= 0)
             {
@@ -173,6 +184,14 @@ namespace CursedCemetery.Scripts.Npc
                 StartCoroutine(DissolveBody());
             }
         }
+
+        IEnumerator TimeHit()
+        {
+            yield return new WaitForSeconds(1);
+            _animator.SetBool(AnimationHit , false);
+            _isHit = false;
+        }
+
         // time to dissolve the AI ​​body
         IEnumerator DissolveBody()
         {

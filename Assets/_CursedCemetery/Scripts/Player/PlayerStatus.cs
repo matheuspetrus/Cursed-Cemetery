@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using CursedCemetery.Scripts.Interfaces;
 using CursedCemetery.Scripts.Systens;
+using CursedCemetery.Scripts.Utilities;
 using UnityEngine;
 
 namespace CursedCemetery.Scripts.Player
@@ -13,6 +14,7 @@ namespace CursedCemetery.Scripts.Player
         [SerializeField] private float _arrows;
 
         [SerializeField] private GameObject _boodHit;
+      
         private void Awake()
         {
             _life = _lifeMax;
