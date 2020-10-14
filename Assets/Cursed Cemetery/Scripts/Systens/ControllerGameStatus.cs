@@ -11,28 +11,31 @@ namespace CursedCemetery.Scripts.Systens
 {
 	public class ControllerGameStatus : MonoBehaviour
 	{
-		[Header("Set Player")]
-		[SerializeField] private GameObject _player;
-	
-		[Header("UI Player Objects")]
-		[SerializeField] private TextMeshProUGUI _life;
+		[Header("Set Player")] [SerializeField]
+		private GameObject _player;
+
+		[Header("UI Player Objects")] [SerializeField]
+		private TextMeshProUGUI _life;
+
 		[SerializeField] private TextMeshProUGUI _arrow;
 		[SerializeField] private TextMeshProUGUI _score;
 		[SerializeField] private TextMeshProUGUI _time;
 
-		[Header("Timer Settings")]
-		[SerializeField] private float _timerStart;
+		[Header("Timer Settings")] [SerializeField]
+		private float _timerStart;
+
 		[SerializeField] private float _timerGame;
 
-		[Header("Menu Objects")]
-		[SerializeField] private GameObject _menuPause;
+		[Header("Menu Objects")] [SerializeField]
+		private GameObject _menuPause;
+
 		[SerializeField] private GameObject _sliderForce;
 
 		private float _warriorsKilled;
 		private float _archersKilled;
 		private float _timerSeconds = 59;
 		private bool _timerActive;
-		private  bool _isPause;
+		private bool _isPause;
 
 		private void Start()
 		{
@@ -46,6 +49,7 @@ namespace CursedCemetery.Scripts.Systens
 			TimerStart();
 			SetPause();
 		}
+
 		// Set player variables
 		private void StatusPlayer()
 		{
@@ -58,10 +62,11 @@ namespace CursedCemetery.Scripts.Systens
 			{
 				_sliderForce.SetActive(false);
 			}
-			
+
 			_life.text = _player.GetComponent<PlayerStatus>().GetLife().ToString();
 			_arrow.text = _player.GetComponent<PlayerStatus>().GetArrows().ToString();
 		}
+
 		// Time to start the game
 		private void TimerStart()
 		{
@@ -75,6 +80,7 @@ namespace CursedCemetery.Scripts.Systens
 				TimerGame();
 			}
 		}
+
 		// playing time
 		private void TimerGame()
 		{
@@ -100,9 +106,19 @@ namespace CursedCemetery.Scripts.Systens
 			string seconds = ((_timerSeconds) % 60).ToString("F0");
 			string minutes = _timerGame.ToString("F0");
 
-			_time.text = minutes + ":" + seconds;
+			if (_timerGame <= 0 && ((_timerSeconds) % 60) <= 30)
+			{
+				_time.fontSize = 100;
+				_time.color = Color.red;
+				_time.text = minutes + ":" + seconds;
+			}
+			else
+			{
+				_time.text = minutes + ":" + seconds;
+			}
+
 		}
-		
+
 		// Initializes the parameters
 		private void InitializeParameters()
 		{
@@ -114,8 +130,8 @@ namespace CursedCemetery.Scripts.Systens
 			Events.DeathEnemyArcher += DeathEnemyArcher;
 			Events.DeathEnemyWarrior += DeathEnemyWarrior;
 			Cursor.visible = false;
-			
-			if (PlayerPrefs.GetFloat("PlayTime") <=0)
+
+			if (PlayerPrefs.GetFloat("PlayTime") <= 0)
 			{
 				_timerGame = 2;
 			}
@@ -125,21 +141,23 @@ namespace CursedCemetery.Scripts.Systens
 				_timerGame--;
 			}
 		}
+
 		// Account of the death of warriors
 		private void DeathEnemyWarrior()
 		{
 			_warriorsKilled++;
-		} 
+		}
+
 		// Account the death of Archers
 		private void DeathEnemyArcher()
 		{
 			_archersKilled++;
 		}
-		
+
 		// Set game over parameters
 		private void GameOver()
 		{
-			Cursor.visible =true;
+			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
 			SetValuesPanelScore();
 			SceneManager.LoadScene(2);
@@ -149,6 +167,7 @@ namespace CursedCemetery.Scripts.Systens
 		{
 			PlayerPrefs.SetInt("GameOverType", 1);
 		}
+
 		private void SetGameOverDied()
 		{
 			PlayerPrefs.SetInt("GameOverType", 0);
@@ -169,6 +188,7 @@ namespace CursedCemetery.Scripts.Systens
 				}
 			}
 		}
+
 		// set pause status parameters
 		private void Pause()
 		{
@@ -177,6 +197,7 @@ namespace CursedCemetery.Scripts.Systens
 			Time.timeScale = 0;
 			_isPause = true;
 		}
+
 		///////////// menu buttons ///////////////
 		public void ButtonExit()
 		{
@@ -194,7 +215,7 @@ namespace CursedCemetery.Scripts.Systens
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
 			_menuPause.SetActive(false);
-			_isPause =false;
+			_isPause = false;
 			Time.timeScale = 1;
 		}
 

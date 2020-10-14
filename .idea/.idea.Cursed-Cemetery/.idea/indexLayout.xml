@@ -11,6 +11,7 @@
       <Path>.idea</Path>
       <Path>.vs</Path>
       <Path>Library</Path>
+      <Path>Temp</Path>
       <Path>UnityPackageManager</Path>
       <Path>obj</Path>
     </explicitExcludes>

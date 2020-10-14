@@ -29,19 +29,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Player/PlayerStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Player/CameraMove.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Systens/SystemMenus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Player/PlayerAnimation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Player/PlayerMove.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Systens/LevelLoader.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Systens/ScoreGameOver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Systens/ControllerGameStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Systens/Events.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Systens/Sounds.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Utilities/SystemShootProjectile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Utilities/Item.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Npc/EnemyAI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Cursed Cemetery/Scripts/Systens/ControllerGameStatus.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -59,6 +47,7 @@
         <option value="$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Player/PlayerMove.cs" />
         <option value="$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Npc/EnemyAI.cs" />
         <option value="$PROJECT_DIR$/Assets/_CursedCemetery/Scripts/Utilities/SystemShootProjectile.cs" />
+        <option value="$PROJECT_DIR$/Assets/Cursed Cemetery/Scripts/Systens/ControllerGameStatus.cs" />
       </list>
     </option>
   </component>
@@ -105,6 +94,7 @@
       <workItem from="1602358131184" duration="7570000" />
       <workItem from="1602607337438" duration="17391000" />
       <workItem from="1602703401541" duration="254000" />
+      <workItem from="1602707656505" duration="2775000" />
     </task>
     <servers />
   </component>

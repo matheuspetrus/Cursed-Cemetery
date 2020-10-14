@@ -6,7 +6,19 @@
     <e p="F:\Users\Pichau\Documents\Cursed-Cemetery" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
-      <e p="Assets\_CursedCemetery" t="Include">
+      <e p="Assets\BOXOPHOBIC" t="Include">
+        <e p="Skybox Cubemap Extended" t="Include">
+          <e p="Core" t="Include">
+            <e p="Editor" t="Include">
+              <e p="SkyboxExtendedWindows.cs" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="Skybox Cubemap Extended.shader" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Assets\Cursed Cemetery" t="Include">
         <e p="Scripts" t="Include">
           <e p="Interfaces" t="Include">
             <e p="IDamage.cs" t="Include" />
@@ -36,18 +48,6 @@
             <e p="Item.cs" t="Include" />
             <e p="Projectile.cs" t="Include" />
             <e p="SystemShootProjectile.cs" t="Include" />
-          </e>
-        </e>
-      </e>
-      <e p="Assets\BOXOPHOBIC" t="Include">
-        <e p="Skybox Cubemap Extended" t="Include">
-          <e p="Core" t="Include">
-            <e p="Editor" t="Include">
-              <e p="SkyboxExtendedWindows.cs" t="Include" />
-            </e>
-            <e p="Shaders" t="Include">
-              <e p="Skybox Cubemap Extended.shader" t="Include" />
-            </e>
           </e>
         </e>
       </e>
