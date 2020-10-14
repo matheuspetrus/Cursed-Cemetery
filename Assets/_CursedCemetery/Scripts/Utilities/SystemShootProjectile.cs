@@ -20,10 +20,12 @@ namespace CursedCemetery.Scripts.Utilities
         [SerializeField] private GameObject spawnArrow;
 
         private PlayerStatus _player;
-        private bool _isPause;
+        [SerializeField] private bool _isAlive;
 
         private void Awake()
         {
+            _isAlive = true;
+            Events.GameOver += SetAlive;
             if (_isPlayer)
             {
                 _player = GetComponent<PlayerStatus>();
@@ -31,9 +33,9 @@ namespace CursedCemetery.Scripts.Utilities
         }
 
         // Set State Pause
-        private void SetPause()
+        private void SetAlive()
         {
-            _isPause = !_isPause;
+            _isAlive = !_isAlive;
         }
     
         // checks and launches the project
@@ -77,18 +79,16 @@ namespace CursedCemetery.Scripts.Utilities
 
         private void Update()
         {
-            if (_isPause)
+            if (!_isAlive)
             {
                 return;
             }
-
             if (Input.GetMouseButton(0) && _isPlayer && _player.GetArrows() > 0)
             {
                 if (_force <= 100)
                 {
                     _force += Time.deltaTime *60;
                 }
-                
             }
 
             if (Input.GetMouseButtonUp(0) && _isPlayer && _player.GetArrows() > 0)

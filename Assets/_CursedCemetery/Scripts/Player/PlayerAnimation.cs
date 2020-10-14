@@ -7,6 +7,7 @@ namespace CursedCemetery.Scripts.Player
         [SerializeField] private Animator _animator;
         
         private readonly string AnimationRun = "Run";
+        private readonly string AnimationDeath = "Death";
         private void Awake()
         {
             InitializeParameters();
@@ -16,6 +17,11 @@ namespace CursedCemetery.Scripts.Player
         public void SetAnimationsRun(bool play)
         {
             _animator.SetBool(AnimationRun, play);
+        }
+        
+        public void SetAnimationsDeath(bool play)
+        {
+            _animator.SetBool(AnimationDeath, play);
         }
     
         private void InitializeParameters()

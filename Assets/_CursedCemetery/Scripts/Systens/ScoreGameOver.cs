@@ -12,6 +12,10 @@ public class ScoreGameOver : MonoBehaviour {
 	[SerializeField] private TextMeshProUGUI _totalScore;
 	[SerializeField] private TextMeshProUGUI _bestScore;
 	
+	[Header("Menu Objects")]
+	[SerializeField] private GameObject _menuTime;
+	[SerializeField] private GameObject _menuDied;
+	
 	private float _warriorsKilled;
 	private float _archersKilled;
 
@@ -22,6 +26,9 @@ public class ScoreGameOver : MonoBehaviour {
 
 	private void SetValuesPanelScore()
 	{
+		
+		setPanel(PlayerPrefs.GetInt("GameOverType"));
+		
 		_warriorsKilled  = PlayerPrefs.GetFloat("WarriorsKilled");
 		_archersKilled = PlayerPrefs.GetFloat("ArchersKilled");
 
@@ -47,6 +54,21 @@ public class ScoreGameOver : MonoBehaviour {
 		}	
 		
 	}
+
+	public void setPanel(int type)
+	{
+		if (type == 0)
+		{
+			_menuDied.SetActive(true);
+			_menuTime.SetActive(false);
+		}
+		else
+		{
+			_menuDied.SetActive(false);
+			_menuTime.SetActive(true);
+		}
+	}
+	
 	public void ButtonMainMenu()
 	{
 		SceneManager.LoadScene(0);

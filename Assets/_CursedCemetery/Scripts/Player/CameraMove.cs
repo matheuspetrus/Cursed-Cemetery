@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CursedCemetery.Scripts.Systens;
+using UnityEngine;
 
 namespace CursedCemetery.Scripts.Player
 {
@@ -7,10 +8,13 @@ namespace CursedCemetery.Scripts.Player
         [Header("Settings")] [SerializeField] private float _mouseSensitivity;
         [SerializeField] private Transform _playerBody;
         [SerializeField] private float _xRotation = 0f;
+        [SerializeField] private bool _isAlive;
 
         //Set mouse sensitivity
         private void Awake()
         {
+            _isAlive = true;
+            Events.GameOver += SetAlive;
             if (PlayerPrefs.GetFloat("MouseSensitivy") <=0 )
             {
                 _mouseSensitivity = 100;
@@ -20,7 +24,11 @@ namespace CursedCemetery.Scripts.Player
                 _mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivy");
             }
         }
-    
+        private void SetAlive()
+        {
+            _isAlive = !_isAlive;
+        }
+
         //locks the cursor on start
         private void Start()
         {
@@ -29,6 +37,10 @@ namespace CursedCemetery.Scripts.Player
 
         private void Update()
         {
+            if (!_isAlive)
+            {
+               return;
+            }
             Move();
         }
 

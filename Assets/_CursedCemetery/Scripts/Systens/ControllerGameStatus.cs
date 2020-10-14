@@ -1,8 +1,10 @@
-﻿using CursedCemetery.Scripts.Player;
+﻿using System.Collections;
+using CursedCemetery.Scripts.Player;
 using CursedCemetery.Scripts.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace CursedCemetery.Scripts.Systens
@@ -25,14 +27,12 @@ namespace CursedCemetery.Scripts.Systens
 		[Header("Menu Objects")]
 		[SerializeField] private GameObject _menuPause;
 		[SerializeField] private GameObject _sliderForce;
-		
-		
+
 		private float _warriorsKilled;
 		private float _archersKilled;
 		private float _timerSeconds = 59;
 		private bool _timerActive;
 		private  bool _isPause;
-		private bool _isGameOver;
 
 		private void Start()
 		{
@@ -92,6 +92,7 @@ namespace CursedCemetery.Scripts.Systens
 					_timerGame = 0;
 					_timerSeconds = 0;
 					_timerActive = false;
+					Events.GameOverTime();
 					Events.GameOver();
 				}
 			}
@@ -108,10 +109,12 @@ namespace CursedCemetery.Scripts.Systens
 			_time.text = _timerStart.ToString("F0");
 			_timerActive = true;
 			Events.GameOver += GameOver;
+			Events.GameOverDied += SetGameOverDied;
+			Events.GameOverTime += SetGameOverTimeOut;
 			Events.DeathEnemyArcher += DeathEnemyArcher;
 			Events.DeathEnemyWarrior += DeathEnemyWarrior;
 			Cursor.visible = false;
-			_isGameOver = false;
+			
 			if (PlayerPrefs.GetFloat("PlayTime") <=0)
 			{
 				_timerGame = 2;
@@ -141,7 +144,16 @@ namespace CursedCemetery.Scripts.Systens
 			SetValuesPanelScore();
 			SceneManager.LoadScene(2);
 		}
-		
+
+		private void SetGameOverTimeOut()
+		{
+			PlayerPrefs.SetInt("GameOverType", 1);
+		}
+		private void SetGameOverDied()
+		{
+			PlayerPrefs.SetInt("GameOverType", 0);
+		}
+
 		// Set State Pause
 		private void SetPause()
 		{
@@ -160,7 +172,6 @@ namespace CursedCemetery.Scripts.Systens
 		// set pause status parameters
 		private void Pause()
 		{
-			Cursor.visible = true;
 			_menuPause.SetActive(true);
 			Cursor.lockState = CursorLockMode.None;
 			Time.timeScale = 0;
@@ -187,7 +198,6 @@ namespace CursedCemetery.Scripts.Systens
 			Time.timeScale = 1;
 		}
 
-		
 		///////////////////////////////////////
 		// Set score panel values
 		private void SetValuesPanelScore()

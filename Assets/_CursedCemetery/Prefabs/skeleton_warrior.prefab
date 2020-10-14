@@ -1655,7 +1655,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: b5af81cd00f35f94c850d6b5ba203836, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1759,7 +1759,7 @@ MonoBehaviour:
   _life: 0
   _probabilityDropItem: 0
   _tempDissolveBody: 3
-  _isAlive: 0
+  _isAlive: 1
   _lookAtTarget: 0
   _shootProjectile: 0
   _isAttack: 0
@@ -1770,6 +1770,7 @@ MonoBehaviour:
   _sounds:
   - {fileID: 8300000, guid: 6b2471ce995865147990fecc66e1e68e, type: 3}
   - {fileID: 8300000, guid: b5af81cd00f35f94c850d6b5ba203836, type: 3}
+  - {fileID: 8300000, guid: 5e596e3ffb488c043b8c2d2f4dae9178, type: 3}
   _audioSource: {fileID: 82595158088601654}
 --- !u!135 &135645734728951446
 SphereCollider:
@@ -1781,8 +1782,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0.84, z: 0}
+  m_Radius: 0.47854835
+  m_Center: {x: 0.02, y: 1.1250801, z: 0.8999991}
 --- !u!136 &136270402226995596
 CapsuleCollider:
   m_ObjectHideFlags: 1

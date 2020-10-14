@@ -59,6 +59,7 @@ namespace CursedCemetery.Scripts.Npc
             _pool = transform.parent.GetComponent<Pooler>();
             _isAlive = true;
             _isAttack = true;
+            Events.GameOver += SetAlive;
             _speedDamage = _enemy.SpeedDamage;
             _agent.speed = _enemy.Speed;
             _life = _enemy.LiveMax;
@@ -97,13 +98,23 @@ namespace CursedCemetery.Scripts.Npc
                 _projectile.SetCanShoot();
             }
         }
+        private void SetAlive()
+        {
+            _isAlive = !_isAlive;
+        }
         // Update is called once per frame
         void Update()
         {
+            if (!_isAlive)
+            {
+                return;
+            }
+
             Move();
             CheckDistance();
             LookAt();
         }
+
         // AI movement
         private void Move()
         {
@@ -130,6 +141,7 @@ namespace CursedCemetery.Scripts.Npc
                 else if(!_isHit)
                 {
                     _audioSource.clip = _sounds[1];
+                    _audioSource.pitch = 1;
                     if ( !_audioSource.isPlaying)
                     {
                         _audioSource.loop = true;
@@ -167,6 +179,14 @@ namespace CursedCemetery.Scripts.Npc
             _agent.speed = 0;
             StartCoroutine( TimeHit());
             _life -= damage;
+            _audioSource.clip = _sounds[2];
+            _audioSource.pitch = 0.5f;
+            if (!_audioSource.isPlaying)
+            {
+                _audioSource.loop = false;
+                _audioSource.Play();
+            }
+
             if (_life <= 0)
             {
                 _agent.speed = 0;

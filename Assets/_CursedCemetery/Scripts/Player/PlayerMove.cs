@@ -19,16 +19,19 @@ namespace CursedCemetery.Scripts.Player
         private float _moveX;
         private float _moveZ;
 
-        [Header("Audios")] [SerializeField] private AudioListener[] sons;
-
         private AudioSource _audioSource;
         private CharacterController _controller;
         private Vector3 _velocity;
+        [SerializeField]  private bool _isAlive;
         
         
         private void Awake()
         {
             InitializeParameters();
+        }
+        private void SetAlive()
+        {
+            _isAlive = !_isAlive;
         }
 
         private void Update()
@@ -39,6 +42,11 @@ namespace CursedCemetery.Scripts.Player
         // Move Player
         private void Move()
         {
+            if (!_isAlive)
+            {
+                _animator.SetAnimationsRun(false);
+                return;
+            }
             _isGrounded = Physics.CheckSphere(_groundCheck.position, groundDistance, _groundMask);
 
             if (_isGrounded && _velocity.y < 0)
@@ -64,6 +72,8 @@ namespace CursedCemetery.Scripts.Player
         // parameter initialization
         private void InitializeParameters()
         {
+            _isAlive = true;
+            Events.GameOver += SetAlive;
             _animator = GetComponent<PlayerAnimation>();
             _controller = GetComponent<CharacterController>();
             _audioSource = GetComponent<AudioSource>();
@@ -84,6 +94,7 @@ namespace CursedCemetery.Scripts.Player
                 _animator.SetAnimationsRun(false);
                 _audioSource.Pause();
             }
+
         }
     }
 }

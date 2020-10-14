@@ -41,7 +41,10 @@ namespace CursedCemetery.Scripts.Player
                 if (_life <= 0)
                 {
                     _life = 0;
+                    _boodHit.SetActive(true);
+                    Events.GameOverDied();
                     Events.GameOver();
+                    
                 }
             }
         }
