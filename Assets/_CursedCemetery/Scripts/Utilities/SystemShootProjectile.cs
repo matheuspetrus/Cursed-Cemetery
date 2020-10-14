@@ -12,6 +12,7 @@ namespace CursedCemetery.Scripts.Utilities
         [SerializeField] private float _forceCurrent;
         [SerializeField] private float _forceVariable;
         [SerializeField] private float _timeToShoot;
+        [SerializeField] private float _strain;
         [SerializeField] private float _amountProjectile;
         [SerializeField] private bool _isPlayer;
         [SerializeField] private bool canShoot = true;
@@ -87,7 +88,7 @@ namespace CursedCemetery.Scripts.Utilities
             {
                 if (_force <= 100)
                 {
-                    _force += Time.deltaTime *60;
+                    _force += Time.deltaTime *_strain;
                 }
             }
 
